@@ -224,8 +224,8 @@ Currently pursuing B.Tech in CSE (2023–2027) @ KIT.
                 break;
             case "achievements":
                 response = `<b>Major Achievements:</b>
-- Finalist: Smart India Hackathon (SIH) 2025
-- Top 10: Aviothic 2.0 Hackathon`;
+- Finalist: Smart India Hackathon (SIH) 2025 <a href="source/SIH.jpg" target="_blank" style="color:#00ff41">[View Certificate]</a>
+- Top 10: Aviothic 2.0 Hackathon <a href="source/Aviothic2.0.jpg" target="_blank" style="color:#00ff41">[View Certificate]</a>`;
                 break;
             case "certifications":
                 response = `<b>Verified Certifications:</b>
@@ -528,3 +528,7 @@ Type 'whoami' for the full profile.`;
         document.head.appendChild(styleSheet);
     }
 });
+
+// Certificate Modal Functions
+function openCertModal(imageSrc) { const modal = document.getElementById('certModal'); if(modal) { document.getElementById('certImage').src = imageSrc; modal.classList.add('active'); } }
+function closeCertModal() { const modal = document.getElementById('certModal'); if(modal) { modal.classList.remove('active'); setTimeout(() => { document.getElementById('certImage').src = ''; }, 300); } }

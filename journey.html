@@ -80,11 +80,13 @@
                                 <span class="badge brutalist-box highlight-blue">2025</span>
                                 <h4>Smart India Hackathon (SIH)</h4>
                                 <p>National-level Finalist in India's biggest hackathon.</p>
+                                <button onclick="openCertModal('source/SIH.jpg')" class="btn box-shadow-small" style="padding: 0.2rem 0.5rem; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block; background-color: var(--bg-color); color: var(--text-color); cursor: pointer;">📄 View Certificate</button>
                             </div>
                             <div class="timeline-item">
                                 <span class="badge brutalist-box highlight-pink">2025</span>
                                 <h4>Aviothic 2.0</h4>
                                 <p>Secured a Top 10 Rank in the college-level hackathon.</p>
+                                <button onclick="openCertModal('source/Aviothic2.0.jpg')" class="btn box-shadow-small" style="padding: 0.2rem 0.5rem; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block; background-color: var(--bg-color); color: var(--text-color); cursor: pointer;">📄 View Certificate</button>
                             </div>
 
                         </div>
@@ -95,6 +97,20 @@
             </section>
         </div>
     </div>
+
+    <!-- Certificate Modal -->
+    <div id="certModal" class="cert-modal" onclick="closeCertModal()">
+        <div class="cert-modal-content brutalist-box box-shadow-main" onclick="event.stopPropagation()">
+            <div class="cert-modal-header border-bottom">
+                <h4>Certificate Preview</h4>
+                <button class="btn highlight-pink box-shadow-small" onclick="closeCertModal()">X</button>
+            </div>
+            <div class="cert-modal-body">
+                <img id="certImage" src="" alt="Certificate Preview">
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
