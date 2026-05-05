@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman - Retro Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-window brutalist-box box-shadow-main">
+            <div class="loader-header">
+                <span class="loader-title handwritten">Loading...</span>
+                <div class="window-controls">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-beige"></span>
+                    <span class="dot dot-teal"></span>
+                </div>
+            </div>
+            <div class="loader-body">
+                <div class="progress-container brutalist-box">
+                    <div class="progress-bar">
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                        <div class="progress-segment"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appears like a piece of paper on a desk -->
+    <div class="desk-background">
+        <div class="page-wrapper">
+            <!-- Header -->
+            <header class="site-header brutalist-box highlight-yellow">
+                <a href="home.html" class="logo box-shadow-main action-btn btn-blue" style="text-decoration: none; color: inherit;">A </a>
+                <nav class="main-nav">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="journey.html">Journey</a>
+                    <a href="terminal.html">Terminal</a>
+                    <a href="#skills">Skills</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="header-actions">
+
+
+                    <button class="btn btn-icon btn-blue switch-theme box-shadow-main">☾</button>
+                </div>
+            </header>
+
+            <!-- Hero Section -->
+            <section id="home" class="hero-section">
+                <div class="hero-content">
+                    <div style="margin-bottom: 1.5rem; margin-top: 0.5rem;">
+                        <h2 class="greeting" style="display: inline-block; background-color: #1a1a1a; padding: 8px 20px; font-size: 1.2rem; transform: rotate(-2deg); box-shadow: 5px 5px 0 var(--accent-blue); border: 2px solid var(--border-color); border-radius: 4px;">
+                            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 800; color: #00ff41;">aman@dev:~$</span> 
+                            <span style="font-family: 'Caveat', cursive; font-size: 1.6rem; margin-left: 10px; color: #f0f0f0; letter-spacing: 0.5px;">Building software with logic and purpose<span style="animation: blink-cursor 1s step-end infinite; color: var(--accent-yellow);">_</span></span>
+                        </h2>
+                        <style>@keyframes blink-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }</style>
+                    </div>
+                    <h1 class="main-title">I'm Aman.</h1>
+                    <p class="hero-description">
+                        A passionate developer who enjoys building efficient and meaningful digital experiences.
+                        I have a strong interest in system-level programming, terminal-based applications, and modern web development —
+                        currently pursuing a B.Tech in CSE (2023–2027) at the Kanpur Institute of Technology.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="contact.html"><button class="btn btn-blue box-shadow-main btn-large">Get in Touch!</button></a>
+
+                    </div>
+
+                    <!-- Tech Badges -->
+                    <div class="tech-badges">
+                        <span class="badge brutalist-box">C++</span>
+                        <span class="badge brutalist-box">Python</span>
+                        <span class="badge brutalist-box">JavaScript</span>
+                        <span class="badge brutalist-box">HTML</span>
+                        <span class="badge brutalist-box">CSS</span>
+                        <span class="badge brutalist-box">React</span>
+                        <span class="badge brutalist-box">Generative AI</span>
+                        <span class="badge brutalist-box">Linux</span>
+                        <span class="badge brutalist-box">Git & GitHub</span>
+                    </div>
+                </div>
+
+                <div class="hero-image-wrapper">
+                    <!-- Placeholder for the illustrated avatar -->
+                    <div class="avatar-container brutalist-box box-shadow-main bg-light-blue">
+                        <div class="floating-badge badge-top-left brutalist-box box-shadow-main btn-blue">&lt;/&gt;
+                        </div>
+                        <div class="floating-badge badge-right brutalist-box box-shadow-main btn-yellow">&gt;_</div>
+                        <div class="floating-badge badge-bottom-left brutalist-box box-shadow-main btn-green">💾</div>
+                        <div class="avatar-placeholder"
+                            style="width: 100%; height: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                            <img src="avatar.png" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="role-badge brutalist-box btn-green">Full-Stack Ninja</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Torn paper divider -->
+            <div class="torn-paper-divider"></div>
+
+            <!-- About Section -->
+            <section id="about" class="about-section">
+                <div class="section-title brutalist-box highlight-yellow box-shadow-main">ABOUT</div>
+                <div class="about-content brutalist-box box-shadow-main">
+                    <p>
+                        I'm a <span class="highlight hl-yellow">passionate developer</span> who enjoys building efficient and meaningful digital experiences. I have a strong interest in <span class="highlight hl-blue">system-level programming</span>, terminal-based applications, and <span class="highlight hl-pink">modern web development</span>.
+                    </p>
+                    <p>
+                        I enjoy working with <span class="highlight hl-blue">Linux environments</span> and exploring how software works under the hood. From creating command-line tools to experimenting with APIs and UI frameworks, I focus on building things that are both <span class="highlight hl-green">practical and elegant</span>.
+                    </p>
+                    <blockquote style="border-left: 5px solid var(--accent-yellow); padding: 0.8rem 1.2rem; margin: 1rem 0; background: rgba(252,213,63,0.08); font-style: italic;">
+                        "Finalist at <span class="highlight hl-yellow">Smart India Hackathon 2025</span> and Top 10 performer at <span class="highlight hl-blue">Aviothic 2.0</span>, with a strong focus on building practical and scalable solutions."
+                    </blockquote>
+                    <p>
+                        Apart from coding, I like exploring new technologies, solving logical problems, and continuously improving my development skills.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="skills-section">
+                <div class="section-title brutalist-box highlight-yellow box-shadow-main">SKILLS</div>
+
+                <div class="skills-grid">
+                    <!-- Programming -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-yellow">
+                        <h4 class="category-title"><span class="icon">&lt;/&gt;</span> PROGRAMMING</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">Python (Advanced)</span>
+                            <span class="badge brutalist-box">C++ (System Dev)</span>
+                            <span class="badge brutalist-box">Shell Scripting</span>
+                            <span class="badge brutalist-box">JavaScript</span>
+                        </div>
+                    </div>
+
+                    <!-- System Development -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-green">
+                        <h4 class="category-title"><span class="icon">⚙️</span> SYSTEM DEV</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">Memory Management</span>
+                            <span class="badge brutalist-box">Low-level Opt.</span>
+                            <span class="badge brutalist-box">TUI Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Expertise -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-blue">
+                        <h4 class="category-title"><span class="icon">🎯</span> EXPERTISE</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">DSA</span>
+                            <span class="badge brutalist-box">UI Frameworks</span>
+                            <span class="badge brutalist-box">System-level Prog.</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools / Linux Admin -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-pink">
+                        <h4 class="category-title"><span class="icon">🐧</span> LINUX & TOOLS</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">System Admin</span>
+                            <span class="badge brutalist-box">Server Mgmt</span>
+                            <span class="badge brutalist-box">Security Protocols</span>
+                            <span class="badge brutalist-box">Git & GitHub</span>
+                        </div>
+                    </div>
+
+                    <!-- Web & AI -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-yellow">
+                        <h4 class="category-title"><span class="icon">🌐</span> WEB & AI</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">React</span>
+                            <span class="badge brutalist-box">HTML/CSS</span>
+                            <span class="badge brutalist-box">Generative AI</span>
+                        </div>
+                    </div>
+                    <!-- Frameworks -->
+                    <div class="skill-category brutalist-box box-shadow-main border-top-green">
+                        <h4 class="category-title"><span class="icon">📦</span> FRAMEWORKS</h4>
+                        <div class="category-badges">
+                            <span class="badge brutalist-box">FastAPI</span>
+                            <span class="badge brutalist-box">Next.js</span>
+                            <span class="badge brutalist-box">Node.js/Express</span>
+                            <span class="badge brutalist-box">Textual (TUI)</span>
+                            <span class="badge brutalist-box">Socket.io</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education & Languages Section -->
+            <section id="education-languages" class="ed-lang-section">
+                <div class="skills-grid-wide">
+                    <!-- Education -->
+                    <div>
+                        <div class="section-title brutalist-box highlight-yellow box-shadow-main full-width-title">
+                            EDUCATION</div>
+                        <div class="brutalist-box box-shadow-main ed-lang-box">
+                            <h4 class="ed-title">Bachelor in Technology, Computer Science Engineering</h4>
+                            <p class="ed-subtitle">Kanpur Institute of Technology, Kanpur Uttar Pradesh</p>
+                            <span class="badge brutalist-box highlight-blue ed-date">2023 - 2027</span>
+                            <div class="ed-location pt-4">📍 Kanpur, Uttar Pradesh</div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div>
+                        <div class="section-title brutalist-box highlight-yellow box-shadow-main full-width-title">
+                            LANGUAGES</div>
+                        <div class="brutalist-box box-shadow-main ed-lang-box">
+                            <div class="lang-item brutalist-box">
+                                <span>English</span>
+                                <div class="lang-stars">
+                                    <span class="star filled">🟨</span>
+                                    <span class="star filled">🟨</span>
+                                    <span class="star filled">🟨</span>
+                                </div>
+                            </div>
+                            <div class="lang-item brutalist-box">
+                                <span>Hindi</span>
+                                <div class="lang-stars">
+                                    <span class="star filled">🟨</span>
+                                    <span class="star filled">🟨</span>
+                                    <span class="star filled">🟨</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Get in Touch Section (Sticky Notes) -->
+            <section id="contact" class="contact-section">
+                <div class="section-title brutalist-box highlight-yellow box-shadow-main">GET IN TOUCH</div>
+
+                <h4 class="text-center contact-subtitle pt-4">Let's build something amazing together</h4>
+
+                <div class="sticky-notes-container">
+                    <a href="https://www.linkedin.com/in/aman-kumar-44b4183a0" target="_blank" class="sticky-note note-blue box-shadow-main">
+                        <div class="tape highlight-yellow"></div>
+                        <div class="note-icon">in</div>
+                        <span class="handwritten">LinkedIn</span>
+                    </a>
+
+                    <a href="https://github.com/Aman-codes0-0" target="_blank" class="sticky-note note-yellow box-shadow-main">
+                        <div class="tape highlight-yellow"></div>
+                        <div class="note-icon">🐙</div>
+                        <span class="handwritten">GitHub</span>
+                    </a>
+
+                    <a href="contact.html" class="sticky-note note-pink box-shadow-main">
+                        <div class="tape highlight-yellow"></div>
+                        <div class="note-icon">✍️</div>
+                        <span class="handwritten">Send Email</span>
+                    </a>
+                </div>
+            </section>
+
+
+
+            <!-- Bottom CTA -->
+            <section class="bottom-cta text-center">
+                <div class="footer-btn action-wrapper pt-4">
+                    <a href="contact.html"><button class="btn btn-large brutalist-box box-shadow-main">Get in Touch!</button></a>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

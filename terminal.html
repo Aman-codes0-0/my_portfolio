@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman — Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0d0d0d;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── CRT screen wrapper ── */
+        .crt {
+            width: 96%;
+            max-width: 1000px;
+            height: 92vh;
+            background: #0a0f0a;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow:
+                0 0 0 1px #1f1f1f,
+                0 0 40px rgba(0,255,65,.12),
+                0 0 80px rgba(0,255,65,.05),
+                0 30px 60px rgba(0,0,0,.9);
+        }
+
+        /* Scanlines */
+        .crt::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,.18) 2px,
+                rgba(0,0,0,.18) 4px
+            );
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* Vignette */
+        .crt::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%);
+            pointer-events: none;
+            z-index: 21;
+        }
+
+        /* ── Title bar ── */
+        .t-titlebar {
+            background: #161616;
+            border-bottom: 1px solid #222;
+            padding: 9px 16px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 30;
+            user-select: none;
+        }
+
+        .t-dots { display: flex; gap: 7px; }
+        .t-dot {
+            width: 13px; height: 13px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: filter .15s;
+        }
+        .t-dot:hover { filter: brightness(1.4); }
+        .d-red  { background: #ff5f57; border: 1px solid #e0443e; }
+        .d-yel  { background: #ffbd2e; border: 1px solid #dea123; }
+        .d-grn  { background: #28c840; border: 1px solid #1faa34; }
+
+        .t-title {
+            position: absolute;
+            left: 50%; transform: translateX(-50%);
+            color: #555;
+            font-size: .78rem;
+            letter-spacing: .03em;
+        }
+
+        .t-back {
+            margin-left: auto;
+            color: #444;
+            font-size: .75rem;
+            text-decoration: none;
+            transition: color .2s;
+            z-index: 1;
+        }
+        .t-back:hover { color: #00ff41; text-shadow: 0 0 8px #00ff41; }
+
+        /* ── Tab bar ── */
+        .t-tabs {
+            background: #111;
+            border-bottom: 1px solid #1e1e1e;
+            padding: 0 16px;
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 30;
+        }
+        .t-tab {
+            padding: 5px 18px;
+            font-size: .75rem;
+            color: #888;
+            border-top: 2px solid transparent;
+            cursor: pointer;
+        }
+        .t-tab.active {
+            color: #00ff41;
+            border-top-color: #00ff41;
+            background: #0a0f0a;
+        }
+
+        /* ── Output ── */
+        .t-output {
+            flex: 1;
+            padding: 14px 20px 4px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: .88rem;
+            line-height: 1.65;
+            color: #00e63a;
+            text-shadow: 0 0 7px rgba(0,255,65,.55);
+            position: relative;
+            z-index: 10;
+        }
+        .t-output-lines { display: block; }
+
+        .t-output::-webkit-scrollbar { width: 5px; }
+        .t-output::-webkit-scrollbar-track { background: transparent; }
+        .t-output::-webkit-scrollbar-thumb { background: #00ff4128; border-radius: 3px; }
+        .t-output::-webkit-scrollbar-thumb:hover { background: #00ff4155; }
+
+        /* Line colour helpers */
+        .c-cmd   { color: #eee; }
+        .c-dim   { color: #3a5c3a; }
+        .c-info  { color: #ffbd2e; text-shadow: 0 0 6px rgba(255,189,46,.4); }
+        .c-err   { color: #ff5f57; text-shadow: 0 0 6px rgba(255,95,87,.4); }
+        .c-ok    { color: #28c840; }
+        .c-blue  { color: #5cc2e6; text-shadow: 0 0 6px rgba(92,194,230,.4); }
+        .c-white { color: #ddd; }
+        .prompt  { color: #5cc2e6; font-weight: 700; }
+
+        /* ── Input line ── */
+        .t-input-wrap {
+            display: flex;
+            align-items: center;
+            padding: 6px 0 14px;
+            position: relative;
+            z-index: 30;
+            flex-shrink: 0;
+        }
+        .t-prompt {
+            white-space: nowrap;
+            font-size: .88rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .p-user { color: #5cc2e6; font-weight: 700; }
+        .p-at   { color: #444; }
+        .p-host { color: #00e63a; font-weight: 700; }
+        .p-col  { color: #444; }
+        .p-path { color: #5af; }
+        .p-dol  { color: #ccc; margin-right: 10px; }
+
+        .t-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #00e63a;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: .88rem;
+            flex: 1;
+            caret-color: #00ff41;
+            text-shadow: 0 0 7px rgba(0,255,65,.55);
+        }
+
+        /* ── Status bar ── */
+        .t-statusbar {
+            background: #00cc33;
+            color: #0a0f0a;
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 3px 16px;
+            display: flex;
+            justify-content: space-between;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 30;
+            letter-spacing: .03em;
+        }
+
+        /* ── Preloader ── */
+        #preloader {
+            position: fixed; inset: 0;
+            background: #0d0d0d;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity .5s, visibility .5s;
+        }
+        #preloader.loaded { opacity: 0; visibility: hidden; }
+        .pre-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff41;
+            font-size: 1.1rem;
+            text-shadow: 0 0 12px #00ff41;
+            animation: blink-pre 1s step-end infinite;
+        }
+        @keyframes blink-pre {
+            0%,100% { opacity: 1; }
+            50%      { opacity: 0; }
+        }
+
+        /* ── Amber Phosphor Theme ── */
+        body.terminal-amber { background: #0d0800; }
+        body.terminal-amber .crt {
+            background: #0a0800;
+            box-shadow: 0 0 0 1px #2a1e00,
+                        0 0 40px rgba(255,176,0,.15),
+                        0 0 80px rgba(255,176,0,.05),
+                        0 30px 60px rgba(0,0,0,.9);
+        }
+        body.terminal-amber .t-output,
+        body.terminal-amber .t-input-wrap { color: #ffb300; }
+        body.terminal-amber .t-output { text-shadow: 0 0 7px rgba(255,179,0,.55); }
+        body.terminal-amber .t-input {
+            color: #ffb300;
+            caret-color: #ffb300;
+            text-shadow: 0 0 7px rgba(255,179,0,.55);
+        }
+        body.terminal-amber .t-statusbar { background: #ffb300; color: #0a0800; }
+        body.terminal-amber .t-titlebar { background: #1a1000; border-bottom-color: #2a1e00; }
+        body.terminal-amber .t-tabs { background: #110d00; border-bottom-color: #2a1e00; }
+        body.terminal-amber .t-tab.active { color: #ffb300; border-top-color: #ffb300; background: #0a0800; }
+        body.terminal-amber .p-user { color: #ff8c00; }
+        body.terminal-amber .p-host { color: #ffb300; }
+        body.terminal-amber .p-dol  { color: #ccc; }
+        body.terminal-amber .prompt { color: #ff8c00; }
+        body.terminal-amber .c-ok   { color: #ffb300; }
+        body.terminal-amber .c-dim  { color: #5a3e00; }
+        body.terminal-amber .c-info { color: #ff6600; text-shadow: none; }
+        body.terminal-amber .c-err  { color: #ff4400; text-shadow: none; }
+        body.terminal-amber .t-back:hover { color: #ffb300; text-shadow: 0 0 8px #ffb300; }
+        body.terminal-amber .pre-text { color: #ffb300; text-shadow: 0 0 12px #ffb300; }
+
+        @media (max-width: 640px) {
+            .crt { width: 100%; height: 100vh; border-radius: 0; }
+            .t-output { font-size: .78rem; padding: 10px 12px; }
+            .t-input  { font-size: .78rem; }
+            .t-title  { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="preloader">
+    <span class="pre-text">Booting terminal...</span>
+</div>
+
+<div class="crt">
+
+    <!-- Title bar -->
+    <div class="t-titlebar">
+        <span class="t-title">aman@portfolio — bash — 80×24</span>
+        <a href="home.html" class="t-back">← GUI</a>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="t-tabs">
+        <div class="t-tab active">bash</div>
+    </div>
+
+    <!-- Output + Input (inside same scrollable area) -->
+    <div id="terminal-output" class="t-output">
+        <div id="terminal-lines" class="t-output-lines"></div>
+        <!-- Input sits at the bottom, inside the terminal body -->
+        <div class="t-input-wrap">
+            <span class="t-prompt">
+                <span class="p-user">aman</span><span class="p-at">@</span><span class="p-host">portfolio</span><span class="p-col">:</span><span class="p-path">~</span><span class="p-dol">&nbsp;$</span>
+            </span>
+            <input type="text" id="terminal-input" class="t-input" autofocus autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="t-statusbar">
+        <span>NORMAL &nbsp;|&nbsp; bash 5.2</span>
+        <span id="t-clock">--:--:--</span>
+        <span>UTF-8 &nbsp;|&nbsp; 80×24</span>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // Live clock
+    (function clock() {
+        const el = document.getElementById('t-clock');
+        function tick() { el.textContent = new Date().toLocaleTimeString('en-GB'); }
+        tick(); setInterval(tick, 1000);
+    })();
+
+    // Restore saved terminal theme
+    if (localStorage.getItem('terminal-theme') === 'amber') {
+        document.body.classList.add('terminal-amber');
+    }
+
+    // Hide preloader
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('preloader').classList.add('loaded');
+        }, 800);
+    });
+</script>
+
+</body>
+</html>
