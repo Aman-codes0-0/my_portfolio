@@ -532,3 +532,6 @@ Type 'whoami' for the full profile.`;
 // Certificate Modal Functions
 function openCertModal(imageSrc) { const modal = document.getElementById('certModal'); if(modal) { document.getElementById('certImage').src = imageSrc; modal.classList.add('active'); } }
 function closeCertModal() { const modal = document.getElementById('certModal'); if(modal) { modal.classList.remove('active'); setTimeout(() => { document.getElementById('certImage').src = ''; }, 300); } }
+
+// Hero Image Toggle Function
+function toggleHeroImage() { const heroImg = document.getElementById('heroImage'); if (heroImg) { const currentSrc = heroImg.getAttribute('src'); if (currentSrc.includes('avatar.png')) { heroImg.setAttribute('src', 'source/aman.jpeg'); } else { heroImg.setAttribute('src', 'source/avatar.png'); } } }
